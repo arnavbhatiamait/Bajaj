@@ -2,7 +2,7 @@ requests==2.28.2
 langchain==0.3.27
 langchain-openai
 langchain-groq==0.3.7
-langchain-huggingface==0.3.27
+langchain-huggingface
 langchain-google-genai==0.3.27
 google-generativeai  # no fixed version since it is integrated with LangChain 🚨 confirm if standalone needed
 langchain-ollama==0.3.27
