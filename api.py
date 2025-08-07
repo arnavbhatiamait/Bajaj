@@ -64,11 +64,13 @@ async def main_app(
     
     files: List[UploadFile] = File(...),
     
-    user_prompt: List[str] = Form(...)
+    user_prompt: List[str] = Form(...),
+    api_key: str=Form(...)
 ):
     # llms, embeddings = llm(model="Groq", model_option="llama-3.1-8b-instant", api_key=os.getenv("GROQ_API_KEY"))
     # llms,embeddings=llm(model="Ollama",model_option="llama3.2",api_key="")
-    llms,embeddings=llm(model="Gemini",model_option="gemini-2.0-flash",api_key=os.getenv("GOOGLE_API_KEY"))
+    
+    llms,embeddings=llm(model="Gemini",model_option="gemini-2.0-flash",api_key=api_key)
 
 
     system_prompt = """You are a helpful assistant that is responsible to provide a response 
