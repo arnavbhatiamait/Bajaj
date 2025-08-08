@@ -4,7 +4,6 @@ python-dotenv
 langchain
 langchain-core
 langchain-text-splitters
-langchain-vectorstores
 langchain-huggingface
 langchain-google-genai
 faiss-cpu
