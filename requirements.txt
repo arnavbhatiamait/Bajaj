@@ -1,18 +1,11 @@
-requests
-langchain
-# langchain-openai
-# langchain-groq==0.3.7
-langchain-huggingface
-langchain-google-genai
-google-generativeai  # no fixed version since it is integrated with LangChain 🚨 confirm if standalone needed
-# langchain-ollama==0.3.27
-# chromadb==0.3.8
-faiss-cpu
-# pinecone-client==2.10.4
-# weaviate-client==3.4.1
-langchain-text-splitters
 fastapi
 uvicorn
-langchain-community
-pyodbc
-python-multipart
+python-dotenv
+langchain
+langchain-core
+langchain-text-splitters
+langchain-vectorstores
+langchain-huggingface
+langchain-google-genai
+faiss-cpu
+PyPDF2
