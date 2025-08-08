@@ -8,46 +8,46 @@ from langchain.chains.retrieval import create_retrieval_chain
 from langchain_core.output_parsers import StrOutputParser
 from langchain.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma, FAISS, Weaviate
-import weaviate
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain_groq import ChatGroq
+from langchain.vectorstores import FAISS
+# import weaviate
+# from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+# from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_google_genai import GoogleGenerativeAI, GoogleGenerativeAIEmbeddings
-from langchain_ollama import ChatOllama, OllamaEmbeddings
+# from langchain_ollama import ChatOllama, OllamaEmbeddings
 # import pyodbc
 from dotenv import load_dotenv 
 load_dotenv()
 def select_vector_store(db_select: str, docs, embedding):
     db_select=db_select.strip()
     db_select=db_select.lower()
-    if db_select == 'faiss':
-        vectordb = FAISS.from_documents(documents=docs, embedding=embedding)
-    elif db_select == 'weaviate':
-        client = weaviate.connect_to_local()
-        vectordb = Weaviate.from_documents(documents=docs, embedding=embedding, client=client)
-    else:
-        vectordb = Chroma.from_documents(documents=docs, embedding=embedding)
+    # if db_select == 'faiss':
+    vectordb = FAISS.from_documents(documents=docs, embedding=embedding)
+    # elif db_select == 'weaviate':
+    #     client = weaviate.connect_to_local()
+    #     vectordb = Weaviate.from_documents(documents=docs, embedding=embedding, client=client)
+    # else:
+    #     vectordb = Chroma.from_documents(documents=docs, embedding=embedding)
     return vectordb
 
 
 def llm(model: str, model_option: str, api_key: str = None):
-    if model == "Open AI":
-        llm = ChatOpenAI(model=model_option, api_key=api_key, verbose=True, temperature=0.1)
-        embeddings = OpenAIEmbeddings(model=model_option, api_key=api_key)
-    elif model == "Ollama":
-        llm = ChatOllama(model=model_option, verbose=True, temperature=0.1)
-        embeddings = OllamaEmbeddings(model=model_option)
-    elif model == "Groq":
-        llm = ChatGroq(model=model_option, api_key=api_key, verbose=True, temperature=0.1)
-        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    elif model == "Gemini":
-        llm = GoogleGenerativeAI(api_key=api_key, verbose=True, temperature=0.1, model=model_option)
-        # embeddings = GoogleGenerativeAIEmbeddings(model=model_option)
-        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    # if model == "Open AI":
+    #     llm = ChatOpenAI(model=model_option, api_key=api_key, verbose=True, temperature=0.1)
+    #     embeddings = OpenAIEmbeddings(model=model_option, api_key=api_key)
+    # elif model == "Ollama":
+    #     llm = ChatOllama(model=model_option, verbose=True, temperature=0.1)
+    #     embeddings = OllamaEmbeddings(model=model_option)
+    # elif model == "Groq":
+    #     llm = ChatGroq(model=model_option, api_key=api_key, verbose=True, temperature=0.1)
+    #     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    # elif model == "Gemini":
+    llm = GoogleGenerativeAI(api_key=api_key, verbose=True, temperature=0.1, model=model_option)
+    # embeddings = GoogleGenerativeAIEmbeddings(model=model_option)
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-    else:
-        raise ValueError(f"Unsupported model: {model}")
+    # else:
+    #     raise ValueError(f"Unsupported model: {model}")
     return llm, embeddings
 
 app = FastAPI()
